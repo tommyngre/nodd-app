@@ -1,5 +1,3 @@
-# Object file
-*.o
-
-# Ada Library Information
-*.ali
+noe_modules
+.DS_Store
+.env
