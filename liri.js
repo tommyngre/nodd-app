@@ -9,6 +9,8 @@ var client = new Twitter(keys.twitter);
 
 var request = require("request");
 
+var fs = require("fs");
+
 let command = process.argv[2];
 let commandParams = process.argv;
 commandParams.splice(0, 3);
@@ -124,6 +126,17 @@ function handler() {
     //random================================================
     case "do-what-it-says":
 
+      fs.readFile('random.txt','utf8', function(error, data) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log(data);
+          //parse
+          handler(data);
+        }
+
+      });
+
       break;
 
     default:
@@ -131,4 +144,4 @@ function handler() {
   }
 }
 
-handler(command);
+handler(command,param);
