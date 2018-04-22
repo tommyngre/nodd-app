@@ -9,10 +9,26 @@ var client = new Twitter(keys.twitter);
 
 let command = process.argv[2];
 let commandParams = process.argv;
-commandParams.splice(0,3);
+commandParams.splice(0, 3);
 let paramStr = commandParams.join(' ');
 
-console.log("paramStr ",paramStr);
+console.log("paramStr ", paramStr);
+
+function printTweet(tweet) {
+  console.log("/================================================================/")
+  console.log(` ${tweet.user.name.toUpperCase()} tweeted on ${tweet.created_at}:`) 
+  console.log(` "${tweet.text}"`) 
+  console.log("/================================================================/")
+
+}
+
+function printSong(song) {
+  console.log("/================================================================/")
+  console.log(` "${song.name}" by ${song.artist}`) 
+  console.log(` From: ${song.album}`)
+  console.log(` Listen @ ${song.link}`)
+  console.log("/================================================================/")
+}
 
 function handler() {
   switch (command) {
@@ -23,7 +39,7 @@ function handler() {
       var params =
         {
           screen_name: 'bimpmeister',
-          count: 10,
+          count: 1,
         };
       //request
       client.get('statuses/user_timeline', params, function (error, tweets, response) {
@@ -32,7 +48,7 @@ function handler() {
         } else {
           //print tweet deets
           tweets.forEach(tweet => {
-            console.log(tweet.text);
+            printTweet(tweet);
           });
         }
       });
@@ -42,24 +58,24 @@ function handler() {
     //spotify===============================================
     case "spotify-this-song":
       //request
-      spotify.search({ type: 'track', query: paramStr }, function(err, data) {
+      spotify.search({ type: 'track', query: paramStr }, function (err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
-        } else { 
-          console.log(data.tracks.items[0]);
-
+        } else {
           let track = data.tracks.items[0];
-          //let artists ==
 
-          let song = 
-          {
-            artist: '',
-            song: track.name,
-            link: track.external_urls[0],
-            album: track.album.name
-          }
+          let artists = track.artists.map(x => x.name)
+            .join(', ');
 
-        } 
+          let song =
+            {
+              artist: artists,
+              name: track.name,
+              link: track.external_urls.spotify,
+              album: track.album.name
+            }
+          printSong(song);
+        }
       });
       break;
 
