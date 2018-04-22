@@ -1,16 +1,18 @@
+// DEPENDENCIES
 require("dotenv").config();
 var keys = require("./keys.js");
-
+//spotify dependencies
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
-
+//twitter dependencies
 var Twitter = require('twitter');
 var client = new Twitter(keys.twitter);
-
+//omdb dependencies
 var request = require("request");
-
+//"do-what-it-says" dependencies
 var fs = require("fs");
 
+//designate commands and param
 let command = process.argv[2];
 let commandParams = process.argv;
 commandParams.splice(0, 3);
@@ -21,7 +23,6 @@ function printTweet(tweet) {
   console.log(` ${tweet.user.name.toUpperCase()} tweeted on ${tweet.created_at}:`)
   console.log(` "${tweet.text}"`)
   console.log("/================================================================/")
-
 }
 
 function printSong(song) {
@@ -40,18 +41,18 @@ function printMovie(movie) {
   console.log("/================================================================/")
 }
 
-function handler() {
+function handler(command,paramStr) {
   switch (command) {
 
     //twitter===============================================
     case "my-tweets":
-      //set request params
+      //set req params
       var params =
         {
           screen_name: 'bimpmeister',
           count: 1,
         };
-      //request
+      //req
       client.get('statuses/user_timeline', params, function (error, tweets, response) {
         if (error) {
           console.log(error)
@@ -62,12 +63,11 @@ function handler() {
           });
         }
       });
-
       break;
 
     //spotify===============================================
     case "spotify-this-song":
-      //request
+      //req
       spotify.search({ type: 'track', query: paramStr }, function (err, data) {
         if (err) {
           return console.log('Error occurred: ' + err);
@@ -97,7 +97,7 @@ function handler() {
         paramStr = "Mr. Nobody";
       }
 
-      //request
+      //req
       request("https://www.omdbapi.com/?t=" + paramStr + "&plot=short&apikey=trilogy", function (error, response, body) {
 
         if (error) {
@@ -118,9 +118,7 @@ function handler() {
 
           printMovie(movie)
         }
-
       });
-
       break;
 
     //random================================================
@@ -130,18 +128,18 @@ function handler() {
         if (error) {
           console.log(error);
         } else {
-          console.log(data);
-          //parse
-          handler(data);
+          //split text into command and params
+          dataAry = data.split(',')
+
+          //call main handle function w/random.txt params
+          handler(dataAry[0],dataAry[1].trim());
         }
-
       });
-
       break;
 
     default:
-      console.log("No command... Sad!");
+      console.log("No known command... Sad!");
   }
 }
 
-handler(command,param);
+handler(command);
