@@ -40,10 +40,10 @@ function printMovie(movie) {
   console.log();
   console.log(` Actors: ${movie.actors}`);
   console.log();
-  console.log(` Ratings: ${movie.imdb} ; ${movie.rottenTomatoes}`);  
+  console.log(` Ratings: ${movie.imdb} ; ${movie.rottenTomatoes}`);
 }
 
-function handler(command,paramStr) {
+function handler(command, paramStr) {
 
   switch (command) {
 
@@ -109,15 +109,15 @@ function handler(command,paramStr) {
           return;
         } else {
           let obj = JSON.parse(body);
-          
+
           let imdb = '';
           let rottenTomatoes = '';
 
           obj.Ratings.forEach(rating => {
-            if (rating.Source == "Internet Movie Database"){
+            if (rating.Source == "Internet Movie Database") {
               imdb = obj.Ratings.indexOf(rating);
             }
-            else if (rating.Source == "Rotten Tomatoes"){
+            else if (rating.Source == "Rotten Tomatoes") {
               rottenTomatoes = obj.Ratings.indexOf(rating);
             }
           })
@@ -125,8 +125,8 @@ function handler(command,paramStr) {
           let movie = {
             title: obj.Title,
             year: obj.Year,
-            imdb: 'IMDB: '+obj.Ratings[imdb].Value,
-            rottenTomatoes: 'Rotten Tomatoes: '+obj.Ratings[rottenTomatoes].Value,
+            imdb: 'IMDB: ' + obj.Ratings[imdb].Value,
+            rottenTomatoes: 'Rotten Tomatoes: ' + obj.Ratings[rottenTomatoes].Value,
             country: obj.Country,
             language: obj.Language,
             plot: obj.Plot,
@@ -141,7 +141,7 @@ function handler(command,paramStr) {
     //RANDOM.TXT
     case "do-what-it-says":
 
-      fs.readFile('random.txt','utf8', function(error, data) {
+      fs.readFile('random.txt', 'utf8', function (error, data) {
         if (error) {
           console.log(error);
         } else {
@@ -149,7 +149,7 @@ function handler(command,paramStr) {
           dataAry = data.split(',')
 
           //call main handle function w/random.txt params
-          handler(dataAry[0],dataAry[1].trim());
+          handler(dataAry[0], dataAry[1].trim());
         }
       });
       break;
@@ -159,4 +159,23 @@ function handler(command,paramStr) {
   }
 }
 
-handler(command,paramStr);
+let log = 'log.txt';
+
+function logCommands(command, paramStr) {
+  let append = 
+    `COMMAND: ${command} ${paramStr}\n`;
+  fs.appendFile(log, append, function (err) {
+
+    if (err) {
+      console.log(err);
+    }
+    else {
+      console.log("Content Added!");
+    }
+
+  });
+
+}
+
+logCommands(command, paramStr);
+handler(command, paramStr);
