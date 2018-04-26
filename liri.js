@@ -17,29 +17,30 @@ let command = process.argv[2];
 let commandParams = process.argv;
 commandParams.splice(0, 3);
 let paramStr = commandParams.join(' ');
-let border = "/================================================================/";
+let border = "*-----------------------------------------------------------------*";
 
 function printTweet(tweet) {
   console.log(border);
   console.log(` ${tweet.user.name.toUpperCase()} tweeted on ${tweet.created_at}:`);
   console.log(` "${tweet.text}"`);
-  console.log(border);
 }
 
 function printSong(song) {
   console.log(border);
   console.log(` "${song.name}" by ${song.artist}`);
-  console.log(` From: ${song.album}`);
-  console.log(` Listen @ ${song.link}`);
-  console.log(border);
+  console.log(` From the album: ${song.album}`);
+  console.log();
+  console.log(` Preview @ ${song.link}`);
 }
 
 function printMovie(movie) {
   console.log(border);
-  console.log(` "${movie.title}" (${movie.year}), Country: ${movie.country}, Language: ${movie.language}`)
-  console.log(` Plot: ${movie.plot}`)
-  console.log(` Actors: ${movie.actors}`)  
-  console.log(border);
+  console.log(` "${movie.title}" (${movie.year}), Country: ${movie.country}, Language: ${movie.language}`);
+  console.log(` Plot: ${movie.plot}`);
+  console.log();
+  console.log(` Actors: ${movie.actors}`);
+  console.log();
+  console.log(` Ratings: ${movie.imdb} ; ${movie.rottenTomatoes}`);  
 }
 
 function handler(command,paramStr) {
@@ -52,7 +53,7 @@ function handler(command,paramStr) {
       var params =
         {
           screen_name: 'bimpmeister',
-          count: 1,
+          count: 20,
         };
       //req
       client.get('statuses/user_timeline', params, function (error, tweets, response) {
@@ -124,8 +125,8 @@ function handler(command,paramStr) {
           let movie = {
             title: obj.Title,
             year: obj.Year,
-            imdb: obj.Ratings[imdb].Value,
-            rottenTomatoes: obj.Ratings[rottenTomatoes].Value,
+            imdb: 'IMDB: '+obj.Ratings[imdb].Value,
+            rottenTomatoes: 'Rotten Tomatoes: '+obj.Ratings[rottenTomatoes].Value,
             country: obj.Country,
             language: obj.Language,
             plot: obj.Plot,
