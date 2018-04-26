@@ -17,34 +17,36 @@ let command = process.argv[2];
 let commandParams = process.argv;
 commandParams.splice(0, 3);
 let paramStr = commandParams.join(' ');
+let border = "/================================================================/";
 
 function printTweet(tweet) {
-  console.log("/================================================================/")
-  console.log(` ${tweet.user.name.toUpperCase()} tweeted on ${tweet.created_at}:`)
-  console.log(` "${tweet.text}"`)
-  console.log("/================================================================/")
+  console.log(border);
+  console.log(` ${tweet.user.name.toUpperCase()} tweeted on ${tweet.created_at}:`);
+  console.log(` "${tweet.text}"`);
+  console.log(border);
 }
 
 function printSong(song) {
-  console.log("/================================================================/")
-  console.log(` "${song.name}" by ${song.artist}`)
-  console.log(` From: ${song.album}`)
-  console.log(` Listen @ ${song.link}`)
-  console.log("/================================================================/")
+  console.log(border);
+  console.log(` "${song.name}" by ${song.artist}`);
+  console.log(` From: ${song.album}`);
+  console.log(` Listen @ ${song.link}`);
+  console.log(border);
 }
 
 function printMovie(movie) {
-  console.log("/================================================================/")
-  //console.log(` "${song.name}" by ${song.artist}`)
-  //console.log(` From: ${song.album}`)
-  //console.log(` Listen @ ${song.link}`)
-  console.log("/================================================================/")
+  console.log(border);
+  console.log(` "${movie.title}" (${movie.year}), Country: ${movie.country}, Language: ${movie.language}`)
+  console.log(` Plot: ${movie.plot}`)
+  console.log(` Actors: ${movie.actors}`)  
+  console.log(border);
 }
 
 function handler(command,paramStr) {
+
   switch (command) {
 
-    //twitter===============================================
+    //TWITTER
     case "my-tweets":
       //set req params
       var params =
@@ -65,7 +67,7 @@ function handler(command,paramStr) {
       });
       break;
 
-    //spotify===============================================
+    //SPOTIFY
     case "spotify-this-song":
       //req
       spotify.search({ type: 'track', query: paramStr }, function (err, data) {
@@ -90,38 +92,52 @@ function handler(command,paramStr) {
       });
       break;
 
-    //omdb==================================================
+    //OMDB
     case "movie-this":
       //default to Mr. Nobody
-      if (paramStr = '') {
+      if (paramStr == '') {
         paramStr = "Mr. Nobody";
       }
 
       //req
-      request("https://www.omdbapi.com/?t=" + paramStr + "&plot=short&apikey=trilogy", function (error, response, body) {
+      let url = "https://www.omdbapi.com/?t=" + paramStr + "&apikey=trilogy";
+
+      request(url, function (error, response, body) {
 
         if (error) {
-          console.log(error);
+          return;
         } else {
-          console.log(body);
+          let obj = JSON.parse(body);
+          
+          let imdb = '';
+          let rottenTomatoes = '';
+
+          obj.Ratings.forEach(rating => {
+            if (rating.Source == "Internet Movie Database"){
+              imdb = obj.Ratings.indexOf(rating);
+            }
+            else if (rating.Source == "Rotten Tomatoes"){
+              rottenTomatoes = obj.Ratings.indexOf(rating);
+            }
+          })
 
           let movie = {
-            title: '',
-            year: '',
-            imdb: '',
-            rottenTomatoes: '',
-            country: '',
-            language: '',
-            plot: '',
-            actors: ''
+            title: obj.Title,
+            year: obj.Year,
+            imdb: obj.Ratings[imdb].Value,
+            rottenTomatoes: obj.Ratings[rottenTomatoes].Value,
+            country: obj.Country,
+            language: obj.Language,
+            plot: obj.Plot,
+            actors: obj.Actors,
           }
 
-          printMovie(movie)
+          printMovie(movie);
         }
       });
       break;
 
-    //random================================================
+    //RANDOM.TXT
     case "do-what-it-says":
 
       fs.readFile('random.txt','utf8', function(error, data) {
@@ -138,8 +154,8 @@ function handler(command,paramStr) {
       break;
 
     default:
-      console.log("No known command... Sad!");
+      console.log("No known command. Sad!");
   }
 }
 
-handler(command);
+handler(command,paramStr);
