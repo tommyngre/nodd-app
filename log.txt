@@ -1,1 +1,84 @@
-movie-this up
+COMMAND: my-tweets 
+*-----------------------------------------------------------------*
+  BIMPMEISTER tweeted on Sat Apr 21 20:23:00 +0000 2018:
+    "That I may detect the inmost force
+Which binds the world, and guides its course;
+Its germs, productive powers explo… https://t.co/oleb5NslZN"
+*-----------------------------------------------------------------*  
+  BIMPMEISTER tweeted on Sat Apr 21 20:23:00 +0000 2018:
+    "That many a secret perchance I reach
+Through spirit-power and spirit-speech,
+And thus the bitter task forego
+Of say… https://t.co/nltR9iK3wc"
+*-----------------------------------------------------------------*  
+  BIMPMEISTER tweeted on Sat Apr 21 20:23:00 +0000 2018:
+    "Then, too, I've neither lands nor gold,
+Nor the world's least pomp or honor hold—
+No dog would endure such a curst… https://t.co/kH9Tk0UaAc"
+*-----------------------------------------------------------------*  
+  BIMPMEISTER tweeted on Sat Apr 21 20:22:59 +0000 2018:
+    "For this, all pleasure am I foregoing;
+I do not pretend to aught worth knowing,
+I do not pretend I could be a teach… https://t.co/zHTm1TgO8t"
+*-----------------------------------------------------------------*  
+  BIMPMEISTER tweeted on Sat Apr 21 20:22:59 +0000 2018:
+    "I'm cleverer, true, than those fops of teachers,
+Doctors and Magisters, Scribes and Preachers;
+Neither scruples nor… https://t.co/0cSqY1JsEU"
+*-----------------------------------------------------------------*  
+  BIMPMEISTER tweeted on Sat Apr 21 20:22:59 +0000 2018:
+    "These ten years long, with many woes,
+I've led my scholars by the nose,—
+And see, that nothing can be known!
+That k… https://t.co/L01Tuu3DqC"
+*-----------------------------------------------------------------*  
+  BIMPMEISTER tweeted on Sat Apr 21 20:22:59 +0000 2018:
+    "And here, poor fool! with all my lore
+I stand, no wiser than before:
+I'm Magister—yea, Doctor—hight,
+And straight o… https://t.co/36M4WYornt"
+*-----------------------------------------------------------------*  
+  BIMPMEISTER tweeted on Sat Apr 21 20:22:59 +0000 2018:
+    "I've studied now Philosophy
+And Jurisprudence, Medicine,—
+And even, alas! Theology,—
+From end to end, with labor keen;"
+*-----------------------------------------------------------------*  
+
+COMMAND: spotify-this-song valkyrie
+*-----------------------------------------------------------------*
+  SONG: "Valkyrie (feat. Laura Brehm)" by Varien, Laura Brehm
+    From the album: Valkyrie (feat. Laura Brehm)
+
+    Preview @ https://open.spotify.com/track/0xSfg4oe6k01VfdCk97Ur2
+*-----------------------------------------------------------------*
+
+COMMAND: m.ovie-this the matrix
+*-----------------------------------------------------------------*
+ "No known command. Sad!"
+*-----------------------------------------------------------------*
+
+COMMAND: m.ovie-this the matrix
+*-----------------------------------------------------------------*
+ "No known command. Sad!"
+*-----------------------------------------------------------------*
+
+COMMAND: movie-this the matrix
+*-----------------------------------------------------------------*
+  MOVIE: "The Matrix" (1999), Country: USA, Language: English
+     
+  PLOT: A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.
+    
+  ACTORS: Keanu Reeves, Laurence Fishburne, Carrie-Anne Moss, Hugo Weaving
+     
+  RATINGS: IMDB: 8.7/10 ; Rotten Tomatoes: 87%
+*-----------------------------------------------------------------*
+
+COMMAND: do-what-it-says 
+*-----------------------------------------------------------------*
+  SONG: "I Want It That Way" by Backstreet Boys
+    From the album: The Hits--Chapter One
+
+    Preview @ https://open.spotify.com/track/6e40mgJiCid5HRAGrbpGA6
+*-----------------------------------------------------------------*
+

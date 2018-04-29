@@ -19,28 +19,60 @@ commandParams.splice(0, 3);
 let paramStr = commandParams.join(' ');
 let border = "*-----------------------------------------------------------------*";
 
+let log = 'log.txt';
+
+function logResult(result) {
+  fs.appendFile(log, result, function (err) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("Results logged")
+    }
+  });
+}
+
 function printTweet(tweet) {
-  console.log(border);
-  console.log(` ${tweet.user.name.toUpperCase()} tweeted on ${tweet.created_at}:`);
-  console.log(` "${tweet.text}"`);
+  let result = `  ${tweet.user.name.toUpperCase()} tweeted on ${tweet.created_at}:
+    "${tweet.text}"
+${border}  
+`;
+
+  return result;
 }
 
 function printSong(song) {
-  console.log(border);
-  console.log(` "${song.name}" by ${song.artist}`);
-  console.log(` From the album: ${song.album}`);
-  console.log();
-  console.log(` Preview @ ${song.link}`);
+  let result = `COMMAND: ${command} ${paramStr}
+${border}
+  SONG: "${song.name}" by ${song.artist}
+    From the album: ${song.album}
+
+    Preview @ ${song.link}
+${border}
+
+`;
+
+  console.log(result);
+
+  logResult(result);
 }
 
 function printMovie(movie) {
-  console.log(border);
-  console.log(` "${movie.title}" (${movie.year}), Country: ${movie.country}, Language: ${movie.language}`);
-  console.log(` Plot: ${movie.plot}`);
-  console.log();
-  console.log(` Actors: ${movie.actors}`);
-  console.log();
-  console.log(` Ratings: ${movie.imdb} ; ${movie.rottenTomatoes}`);
+  let result = `COMMAND: ${command} ${paramStr}
+${border}
+  MOVIE: "${movie.title}" (${movie.year}), Country: ${movie.country}, Language: ${movie.language}
+     
+  PLOT: ${movie.plot}
+    
+  ACTORS: ${movie.actors}
+     
+  RATINGS: ${movie.imdb} ; ${movie.rottenTomatoes}
+${border}
+
+`;
+
+  console.log(result);
+
+  logResult(result);
 }
 
 function handler(command, paramStr) {
@@ -61,9 +93,20 @@ function handler(command, paramStr) {
           console.log(error)
         } else {
           //print tweet deets
+
+          let result = `COMMAND: ${command} ${paramStr}
+${border}
+`;
+
           tweets.forEach(tweet => {
-            printTweet(tweet);
+            result += printTweet(tweet);
           });
+
+          //carriage return
+          result += `
+`;
+          console.log(result);
+          logResult(result);
         }
       });
       break;
@@ -155,27 +198,15 @@ function handler(command, paramStr) {
       break;
 
     default:
-      console.log("No known command. Sad!");
+      let result = `COMMAND: ${command} ${paramStr}
+${border}
+ "No known command. Sad!"
+${border}
+
+`;
+      console.log(result);
+      logResult(result);
   }
 }
 
-let log = 'log.txt';
-
-function logCommands(command, paramStr) {
-  let append = 
-    `COMMAND: ${command} ${paramStr}\n`;
-  fs.appendFile(log, append, function (err) {
-
-    if (err) {
-      console.log(err);
-    }
-    else {
-      console.log("Content Added!");
-    }
-
-  });
-
-}
-
-logCommands(command, paramStr);
 handler(command, paramStr);
