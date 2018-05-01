@@ -58,11 +58,6 @@ COMMAND: m.ovie-this the matrix
  "No known command. Sad!"
 *-----------------------------------------------------------------*
 
-COMMAND: m.ovie-this the matrix
-*-----------------------------------------------------------------*
- "No known command. Sad!"
-*-----------------------------------------------------------------*
-
 COMMAND: movie-this the matrix
 *-----------------------------------------------------------------*
   MOVIE: "The Matrix" (1999), Country: USA, Language: English
@@ -82,3 +77,7 @@ COMMAND: do-what-it-says
     Preview @ https://open.spotify.com/track/6e40mgJiCid5HRAGrbpGA6
 *-----------------------------------------------------------------*
 
+COMMAND: all the things she said
+*-----------------------------------------------------------------*
+ "No known command. Sad!"
+*-----------------------------------------------------------------*
