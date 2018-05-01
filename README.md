@@ -1,5 +1,5 @@
 # node-app
-node-app executes 4 different commands, each with different parameters:
+node-app executes 4 different commands, each with different parameters. All commands print to a text file (log.txt), even if the commands are unknown.
 
 ### my-tweets
 No parameters.
