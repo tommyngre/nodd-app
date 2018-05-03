@@ -76,8 +76,3 @@ COMMAND: do-what-it-says
 
     Preview @ https://open.spotify.com/track/6e40mgJiCid5HRAGrbpGA6
 *-----------------------------------------------------------------*
-
-COMMAND: all the things she said
-*-----------------------------------------------------------------*
- "No known command. Sad!"
-*-----------------------------------------------------------------*

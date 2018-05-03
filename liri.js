@@ -25,8 +25,6 @@ function logResult(result) {
   fs.appendFile(log, result, function (err) {
     if (err) {
       console.log(err);
-    } else {
-      console.log("Results logged")
     }
   });
 }
