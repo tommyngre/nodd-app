@@ -1,10 +1,11 @@
 {
-  "name": "node-app",
+  "name": "app",
   "version": "1.0.0",
   "description": "https://www.npmjs.com/package/node-spotify-api\r https://www.npmjs.com/package/twitter\r https://www.npmjs.com/package/request\r https://www.npmjs.com/package/dotenv",
   "main": "keys.js",
   "dependencies": {
     "dotenv": "^5.0.1",
+    "fs": "0.0.1-security",
     "node-spotify-api": "^1.0.7",
     "request": "^2.85.0",
     "twitter": "^1.7.1"
@@ -18,7 +19,7 @@
     "url": "git+https://github.com/tommyngre/node-app.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "tommy",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/tommyngre/node-app/issues"
